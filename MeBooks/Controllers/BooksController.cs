@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Microsoft.Owin;
+using Microsoft.Owin.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MeBooks.Entities;
+
 
 namespace MeBooks.Controllers
 {
@@ -20,6 +23,21 @@ namespace MeBooks.Controllers
             }
             return View(m);
         }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
 
         [HttpGet]
         [ActionName("Create")]
