@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MeBooks.Entities;
+using MeBooks.Models;
 
 
 namespace MeBooks.Controllers
@@ -13,15 +14,32 @@ namespace MeBooks.Controllers
     [Authorize]
     public class BooksController : Controller
     {
+        BooksEntities db = new BooksEntities();
         // GET: Books
-        public ActionResult Index()
+        public ActionResult Index(string option, string search)
         {
             List<Books> m;
+            //using (var r = new BooksEntities())
+            //{
+            //    m = r.Books.ToList();
+            //}
+            //return View(m);
+
+            //if a user choose the radio button option as Subject  
+            if (option == "Author")
+            {
+                return View(db.Books.Where(x => x.Author.StartsWith(search) || search == null).ToList());
+            }
+            else if (option == "BookName")
+            {
+                return View(db.Books.Where(x => x.BookName.StartsWith(search) || search == null).ToList());
+            }
+            else
             using (var r = new BooksEntities())
             {
                 m = r.Books.ToList();
             }
-            return View(m);
+            return View(m); 
         }
 
         public ActionResult About()

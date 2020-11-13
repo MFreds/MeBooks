@@ -9,6 +9,17 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm("Index", "Books", FormMethod.Get, new { @class = "navbar-right" }))
+{
+    //the following are search options
+    <b> Search Option: </b>
+    @Html.RadioButton("option", "BookName")<text>Book Name</text>
+    @Html.RadioButton("option", "Author") <text>Author</text>
+    @Html.TextBox("search")
+    <input type="submit" name="submit" value="Search" class="btn btn-default btn-sm" />
+}
+
 <table class="table">
     <tr class="active">
         <th>
@@ -29,26 +40,27 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BookCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BookName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Genre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { code=item.BookCode }, new { @class = "btn btn-warning btn-sm" }) |
-            @Html.ActionLink("Details", "Details", new { code = item.BookCode }, new { @class = "btn btn-info btn-sm" }) |
-            @Html.ActionLink("Delete", "Delete", new { code = item.BookCode }, new { @class = "btn btn-danger btn-sm" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { code = item.BookCode }, new { @class = "btn btn-warning btn-sm" }) |
+                @Html.ActionLink("Details", "Details", new { code = item.BookCode }, new { @class = "btn btn-info btn-sm" }) |
+                @Html.ActionLink("Delete", "Delete", new { code = item.BookCode }, new { @class = "btn btn-danger btn-sm" })
+            </td>
+        </tr>
+    }
 
 </table>
